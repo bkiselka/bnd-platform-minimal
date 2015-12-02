@@ -19,6 +19,7 @@ plugins {
 
 repositories {
 	mavenCentral()
+    maven { url "http://psfs:81/artifactory/libs-snapshot/" }
 }
 
 defaultTasks 'clean', 'updateSiteZip'
@@ -26,7 +27,10 @@ defaultTasks 'clean', 'updateSiteZip'
 platform {
 	// just one example dependency in this configuration
 	// provide your own configuration - for more information see the bnd-platform docs on GitHub
-	bundle 'commons-io:commons-io:2.4'
+	bundle 'at.prismasolutions.ppcf:at.prismasolutions.ppcf.sm.oh.api:1.0.0-SNAPSHOT'
+	// optionally exclude org.jboss.spec.javax.ejb:jboss-ejb-api_3.1_spec:1.0.2.Final and xerces:xercesImpl:2.4.0
+	// adds to much dependencies:
+	// bundle 'at.prismasolutions.ppcf:at.prismasolutions.ppcf.sm.oh.schema.api:1.0.0-SNAPSHOT'
 }
 
 task wrapper(type: Wrapper) {
