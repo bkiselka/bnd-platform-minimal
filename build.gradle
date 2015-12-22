@@ -28,7 +28,26 @@ platform {
 	// just one example dependency in this configuration
 	// provide your own configuration - for more information see the bnd-platform docs on GitHub
 	bundle 'at.prismasolutions.ppcf:at.prismasolutions.ppcf.sm.oh.api:1.0.0-SNAPSHOT'
+	bundle 'at.prismasolutions.ppcf:at.prismasolutions.ppcf.core.feature.bean.api:1.0.0-SNAPSHOT'
+	bundle 'at.prismasolutions.ppcf:at.prismasolutions.ppcf.core.common.service:1.0.0-SNAPSHOT'
+	bundle 'at.prismasolutions.ppcf:at.prismasolutions.ppcf.sm.oca.api:1.0.0-SNAPSHOT'
+	bundle 'at.prismasolutions.ppcf:at.prismasolutions.ppcf.core.modelconfig.bean.api:1.0.0-SNAPSHOT'
+	bundle 'at.prismasolutions.ppcf:at.prismasolutions.ppcf.core.configreader.xmi.mapping:1.0.0-SNAPSHOT'
 	// optionally exclude org.jboss.spec.javax.ejb:jboss-ejb-api_3.1_spec:1.0.2.Final and xerces:xercesImpl:2.4.0
+	/* {
+		// does not work:
+		exclude group: 'org.jboss.spec.javax.ejb', module: 'jboss-ejb-api_3.1_spec' //by both name and group
+		exclude group: 'xerces', module: 'xercesImpl' //by both name and group
+	}*/
+	// as excluding does not work, mark the packages as optional import
+	override {
+		// org.jboss.spec.javax.ejb:jboss-ejb-api_3.1_spec:1.0.2.Final and xerces:xercesImpl:2.4.0 available in JBoss 6.1.0 Final - so we can exclude it from products
+		optionalImport 'javax.ejb', 'javax.ejb.*', 'org.apache.xerces', 'org.apache.xerces.*'
+	}
+
+	bundle 'javax.transaction:jta:1.1'
+	bundle 'javax.xml:jaxrpc-api:1.1'
+
 	// adds to much dependencies:
 	// bundle 'at.prismasolutions.ppcf:at.prismasolutions.ppcf.sm.oh.schema.api:1.0.0-SNAPSHOT'
 }
